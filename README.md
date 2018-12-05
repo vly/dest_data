@@ -1,7 +1,17 @@
 # Destiny 2 API scraper
 
+## Overview
+
 This is a data retrieval scraper to pull Destiny 2 player player data, their state, and activity history among others.
 It's purpose written for a specific use-case (generate timeseries data for retention analysis) but can be utilised for other purposes.
+
+## Quickstart
+
+Retrieve a user's characters including light, and base stats:
+
+```
+./dest_data user plasticmice
+```
 
 ## Installation
 
@@ -16,7 +26,20 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/dest_data](https://hexdocs.pm/dest_data).
+## Development
 
+### Building
+```
+mix deps.get
+mix escript.build
+```
+
+### Running tests
+```
+mix test
+```
+
+### Running dialyzer
+```
+mix dialyzer
+```

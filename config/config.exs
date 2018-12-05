@@ -3,7 +3,12 @@
 
 use Mix.Config
 
+# location of API key data
 dev_secret_path = Path.expand("config/dev.secret.exs")
+
+# application settings
+config :dest_data, user_agent: "DestData 0.1"
+config :dest_data, dest_endpoint: "https://www.bungie.net/Platform"
 
 if Mix.env in [:dev, :test, :prod] do
   if File.exists?(dev_secret_path) do
