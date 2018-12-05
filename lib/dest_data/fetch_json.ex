@@ -19,12 +19,10 @@ defmodule DestData.JSONFetch do
       |> IO.inspect
   end
 
-  def retrieve_manifests() do
+def retrieve_manifests() do
     get_manifests()
       |> elem(0) # ["mobileGearCDN"]
       |> Enum.map(fn ({name, manifest}) -> download_manifest(name, manifest) end)
-
-    # download_manifest("zh-cht", "/common/destiny2_content/sqlite/zh-cht/world_sql_content_c4f0b2b59e142007176352883f6cbc56.content")
   end
   
   def fetch(url) do
