@@ -11,6 +11,7 @@ defmodule DestData.CLI do
                              aliases: [h: :help])
     case parse do
       {[help: true], _}                           -> :help
+      {[help: true], [command], _}                -> {:help, String.to_atom(command)}
       {_, [command], [key: key, val: val]}        -> {String.to_atom(command), key, val}
       {[], [command, param], _}                   -> {String.to_atom(command), param}
       {[], [command, param, param2], _}           -> {String.to_atom(command), param, param2}
@@ -28,7 +29,7 @@ defmodule DestData.CLI do
   end
 
   def process(:users) do
-    process(:help)
+    process({:help, :users})
     IO.puts "Error: Specify a user to retrieve data for."
   end
 
@@ -53,7 +54,21 @@ defmodule DestData.CLI do
       scrape        Start recursive scrapper
 
     example: dest_data users plasticmice
+    command specific information: dest_data -h users
     """
   end
+
+  def process({:help, :users}) do
+    IO.puts """
+    Data grab
+    ---------
+    users command usage: dest_data users <username> [options]
+
+    options:
+      username           Username of profile you're searching for
+      -sys <system>      System scope (ps4 (default), pc, xbox)
+    
+    example: dest_data users plasticmice -sys pc
+    """
 end
 
