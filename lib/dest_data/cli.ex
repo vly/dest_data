@@ -70,5 +70,6 @@ defmodule DestData.CLI do
     
     example: dest_data users plasticmice -sys pc
     """
+  end
 end
 

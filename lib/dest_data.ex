@@ -17,4 +17,18 @@ defmodule DestData do
       scrape        Initiate a recursive data scrape
 
   """
+
+  defmacro __using__(_) do
+    quote do
+      alias DestData.JSONFetch
+      alias DestData.Accounts
+      alias DestData.Characters
+      alias DestData.CLI
+      alias DestData.Manifests
+      alias DestData.Storage
+    end
+  end
+
+  use DestData.Constants
+
 end

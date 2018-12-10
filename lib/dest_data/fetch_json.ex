@@ -1,10 +1,9 @@
 # lib/dest_data/fetch_json.ex
 
 defmodule DestData.JSONFetch do
-  @api_key Application.get_env(:dest_data, :api_key)
-  @endpoint Application.get_env(:dest_data, :dest_endpoint)
-  @user_agent Application.get_env(:dest_data, :user_agent)
-
+  use DestData.Constants
+  
+  alias __MODULE__
   alias DestData.Accounts
 
   @doc """

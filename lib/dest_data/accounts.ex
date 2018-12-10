@@ -1,38 +1,30 @@
 defmodule DestData.Accounts do
-  import DestData
-  alias DestData.JSONFetch
-  @endpoint Application.get_env(:dest_data, :dest_endpoint)
- 
 
+  use DestData.Constants
+
+  alias __MODULE__
+  alias DestData.JSONFetch
+  
   @doc """
   Retrieve account scope data from Bungie and Destiny specific endpoints.
   """
 
-  def get_member(memberId) do
+  defp get_member(memberId) do
     defmodule Member do
       defstruct [:name]
     end
     "#{@endpoint}/User/GetMembershipsById/#{memberId}/-1/"
   end
 
-  def get_user(username) do
-    IO.puts(username)
+  defp get_user(username) do
     defmodule User do
       defstruct [:displayName, :iconPath, :membershipId, :membershipType]
     end
 
     "#{@endpoint}/Destiny2/SearchDestinyPlayer/2/#{username}/"
-      |> JSONFetch.fetch
-      |> elem(1)
-      |> hd()
-  end
-
-  defp get_characters(user) do
-    membershipType = user["membershipType"]
-    memberId = user["membershipId"]
-    "#{@endpoint}/Destiny2/#{membershipType}/Profile/#{memberId}/?components=characters"
       |> fetch
       |> elem(1)
-  end
+    #|> hd()
 
+  end
 end
