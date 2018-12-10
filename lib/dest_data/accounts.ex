@@ -25,6 +25,14 @@ defmodule DestData.Accounts do
       |> fetch
       |> elem(1)
     #|> hd()
-
   end
+
+  defp get_characters(user) do
+    membershipType = user["membershipType"]
+    memberId = user["membershipId"]
+    "#{@endpoint}/Destiny2/#{membershipType}/Profile/#{memberId}/?components=characters"
+      |> fetch
+      |> elem(1)
+  end
+
 end

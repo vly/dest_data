@@ -1,6 +1,16 @@
 # lib/dest_data/activities.ex
 
 defmodule DestData.Activities do
+
+  use DestData.Constants
+  
+  alias __MODULE__
+
+  @doc """
+  Methods for retrieving account/character activity details
+
+  """
+
   def get_activities(user, character) do
     IO.puts "#{user} and #{character} stuff"
   end

@@ -1,7 +1,8 @@
 # lib/dest_data/storage.ex
 
 defmodule DestData.Storage do
-  import DestData
+
+  alias __MODULE__
 
   @doc """
   Contains options for data storage for scrapper functionality of `dest_data`

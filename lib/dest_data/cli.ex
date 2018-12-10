@@ -1,6 +1,9 @@
 # lib/dest_data/cli.ex
 
 defmodule DestData.CLI do
+
+  alias __MODULE__
+
   def main(args) do
     parse_args(args)
     |> process

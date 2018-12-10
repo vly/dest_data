@@ -1,8 +1,9 @@
 # lib/dest_data/manifests.ex
 
 defmodule DestData.Manifests do
-  import DestData
-  #@endpoint Application.get_env(:dest_data, :dest_endpoint)
+  use DestData.Constants
+  
+  alias __MODULE__
   alias DestData.JSONFetch
 
   def retrieve_manifests() do
