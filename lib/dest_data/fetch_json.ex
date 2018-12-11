@@ -63,22 +63,8 @@ def retrieve_manifests() do
     IO.puts body
   end
 
-  defp get_member(memberId) do
-    defmodule Member do
-      defstruct [:name]
-    end
-    "#{@endpoint}/User/GetMembershipsById/#{memberId}/-1/"
-  end
-
-  defp get_characters(user) do
-    membershipType = user["membershipType"]
-    memberId = user["membershipId"]
-    "#{@endpoint}/Destiny2/#{membershipType}/Profile/#{memberId}/?components=characters"
-      |> fetch
-      |> elem(1)
-  end
-
-  defp get_activities(character) do
+  
+    defp get_activities(character) do
     character = character["Response"]["characters"]["data"]["2305843009393603767"]
     membershipType = character["membershipType"]
     destinyMembershipId = character["membershipId"]
