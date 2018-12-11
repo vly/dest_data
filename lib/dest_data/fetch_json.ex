@@ -10,14 +10,6 @@ defmodule DestData.JSONFetch do
   `fetch` retrieves user history from username
   """
   
-  def search_user(username) do
-    Accounts.get_user(username)["Response"]
-      |> hd()
-      |> get_characters()
-      |> get_activities()
-      |> IO.inspect
-  end
-
 def retrieve_manifests() do
     get_manifests()
       |> elem(0) # ["mobileGearCDN"]
@@ -40,7 +32,7 @@ def retrieve_manifests() do
              :timer.sleep(message * 1000)
              fetch(url)
            {:error, %{error: "retrieval", message: message}} -> {message}
-           {:ok, %{data: data}} -> {data}
+           {:ok, %{data: data}} -> data
          end
   end
   

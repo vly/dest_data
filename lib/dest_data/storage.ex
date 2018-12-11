@@ -12,7 +12,25 @@ defmodule DestData.Storage do
   * Flatfile (csv)
   * SQLite3
   * Postgres
+  * Neo4j
+  * Google BigQuery
 
   For production-esk environments, Postgres is recommended.
   """
+
+  def write_csv(filepath, data) do
+  end
+
+  def write_sqlite(dbpath, data) do
+  end
+
+  def write_postgres(dbconn, data) do
+  end
+
+  def write_neo4j(dbconn, data) do
+  end
+
+  def write_bq(dbconn, data) do
+  end
+
 end

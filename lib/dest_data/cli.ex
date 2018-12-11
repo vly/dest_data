@@ -28,7 +28,7 @@ defmodule DestData.CLI do
   end
 
   def process({:users, param}) do
-    DestData.JSONFetch.search_user(param)
+    DestData.Accounts.search_user(param)
   end
 
   def process(:users) do
