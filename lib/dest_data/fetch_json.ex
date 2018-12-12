@@ -4,16 +4,19 @@ defmodule DestData.JSONFetch do
   use DestData.Constants
   
   alias __MODULE__
-  alias DestData.Accounts
+  alias DestData.{
+    Accounts,
+    Manifests,
+  }
 
   @doc """
   `fetch` retrieves user history from username
   """
   
 def retrieve_manifests() do
-    get_manifests()
+    Manifests.get_manifests()
       |> elem(0) # ["mobileGearCDN"]
-      |> Enum.map(fn ({name, manifest}) -> download_manifest(name, manifest) end)
+      |> Enum.map(fn ({name, manifest}) -> Manifests.download_manifest(name, manifest) end)
   end
   
   def fetch(url) do
@@ -61,29 +64,5 @@ def retrieve_manifests() do
   defp parse_json({_, %{status_code: status, body: body}}) do
     IO.puts "Error retrieving data: #{status}"
     IO.puts body
-  end
-
-  
-    defp get_activities(character) do
-    character = character["Response"]["characters"]["data"]["2305843009393603767"]
-    membershipType = character["membershipType"]
-    destinyMembershipId = character["membershipId"]
-    characterId = character["characterId"]
-
-    "#{@endpoint}/Destiny2/#{membershipType}/Account/#{destinyMembershipId}/Character/#{characterId}/Stats/Activities/?count=100"
-      |> fetch
-      |> elem(1)
-  end
-
-  defp get_manifests() do
-    "#{@endpoint}/Destiny2/Manifest/"
-      |> fetch
-  end
-
-  defp download_manifest(name, manifest) do
-    %HTTPoison.Response{body: body} = "https://www.bungie.net/#{manifest}"
-      |> HTTPoison.get!()
-    IO.puts "Downloaded #{name} manifest" 
-    File.write("data/#{name}.content", body)
   end
 end

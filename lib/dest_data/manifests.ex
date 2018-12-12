@@ -16,7 +16,7 @@ defmodule DestData.Manifests do
     #download_manifest("zh-cht", "/common/destiny2_content/sqlite/zh-cht/world_sql_content_c4f0b2b59e142007176352883f6cbc56.content")
   end
 
-  defp get_manifests() do
+  def get_manifests() do
     "#{@endpoint}/Destiny2/Manifest/"
       |> JSONFetch.fetch
   end
@@ -24,7 +24,7 @@ defmodule DestData.Manifests do
   defp process_manifests() do
   end  
 
-  defp download_manifest(name, manifest) do
+  def download_manifest(name, manifest) do
     %HTTPoison.Response{body: body} = "https://www.bungie.net/#{manifest}"
       |> HTTPoison.get!()
     IO.puts "Downloaded #{name} manifest" 

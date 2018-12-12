@@ -3,9 +3,11 @@ defmodule DestData.Accounts do
   use DestData.Constants
 
   alias __MODULE__
-  alias DestData.JSONFetch
-  alias DestData.Utilities
-  alias DestData.Activities
+  alias DestData.{
+    JSONFetch,
+    Utilities,
+    Activities,
+  }
   
   @doc """
   Retrieve account scope data from Bungie and Destiny specific endpoints.
@@ -40,14 +42,13 @@ defmodule DestData.Accounts do
     "#{@endpoint}/Destiny2/#{membershipType}/Profile/#{memberId}/?components=characters"
     |> JSONFetch.fetch
     |> process_characters()
-    |> Activities.get_activities(user)
+    |> Enum.map( fn character -> Activities.get_activities(character, user) end)
     |> IO.inspect
   end
 
   def search_user(username) do
     Accounts.get_user(username)
       |> Accounts.get_characters()
-      |> IO.inspect
   end  
 
   defp process_characters(data) do
@@ -61,10 +62,8 @@ defmodule DestData.Accounts do
     end 
 
     data["characters"]["data"]
-    |> Enum.each(fn {_, v} -> Utilities.key_to_atom(v) 
-    |> Utilities.struct_pipe(Accounts.Character)
-    |> IO.inspect
-    end)
+    |> Enum.map(fn {_, v} -> Utilities.key_to_atom(v) end)
+    |> Enum.map( fn v -> Utilities.struct_pipe(v, Accounts.Character) end)
     
 
   end

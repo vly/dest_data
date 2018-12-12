@@ -20,12 +20,14 @@ defmodule DestData do
 
   defmacro __using__(_) do
     quote do
-      alias DestData.JSONFetch
-      alias DestData.Accounts
-      alias DestData.Characters
-      alias DestData.CLI
-      alias DestData.Manifests
-      alias DestData.Storage
+      alias DestData.{
+        JSONFetch,
+        Accounts,
+        Characters,
+        CLI,
+        Manifests,
+        Storage,
+      }
     end
   end
 
