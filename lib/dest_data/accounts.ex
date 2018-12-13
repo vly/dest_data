@@ -36,14 +36,12 @@ defmodule DestData.Accounts do
   end
 
   def get_characters(user) do
-    IO.inspect(user)
     membershipType = Map.get(user, :membershipType)
     memberId = Map.get(user, :membershipId)
     "#{@endpoint}/Destiny2/#{membershipType}/Profile/#{memberId}/?components=characters"
     |> JSONFetch.fetch
     |> process_characters()
     |> Enum.map( fn character -> Activities.get_activities(character, user) end)
-    |> IO.inspect
   end
 
   def search_user(username) do
