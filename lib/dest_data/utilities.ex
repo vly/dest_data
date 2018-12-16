@@ -12,4 +12,11 @@ defmodule DestData.Utilities do
   def struct_pipe(a, b) do
     struct(b, a)
   end
+
+  def process_response(response, datatype) do
+    response
+    |> Enum.map(fn {_, v} -> key_to_atom(v) end)
+    |> Enum.map( fn v -> struct_pipe(v, datatype) end)
+  end
+
 end
